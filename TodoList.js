@@ -94,12 +94,14 @@ function init(){
 
     // 项目列表
     var itemList = JSON.parse(storage.getItem("TodoList"));
-    for(let item of itemList){
-        let li = addItem(item.Value);
-        if(item.Completed){
-            li.classList.add("completed");
-            li.querySelector(".toggle").checked=true;
-            todoNum--;  
+    if(itemList){
+        for(let item of itemList){
+            let li = addItem(item.Value);
+            if(item.Completed){
+                li.classList.add("completed");
+                li.querySelector(".toggle").checked=true;
+                todoNum--;  
+            }
         }
     }
 
