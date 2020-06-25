@@ -118,6 +118,12 @@ function update(){
     $(".todo-count").innerHTML=num+str;
 
     var itemList=$All(".todo-list li");
+    if(itemList.length>0){
+        $(".toggle-all").classList.remove("hidden");
+    }
+    else{
+        $(".toggle-all").classList.add("hidden");
+    }
     var filter=$(".filters .selected").innerHTML;
     var itemsData=[];
     switch(filter){
@@ -287,6 +293,7 @@ function addItem(value){
             if(li.classList.contains("completed")){
                 li.classList.remove("completed");
                 toggle.checked=false;
+                $(".toggle-all").checked=false;
                 todoNum++;
                 update();
             }
@@ -297,8 +304,8 @@ function addItem(value){
         e.stopPropagation();
         
     });
-
-
+    // 取消全选
+    $(".toggle-all").checked=false;
     $(".todo-list").appendChild(li);
     update();
     return li;
