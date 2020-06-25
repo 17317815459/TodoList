@@ -146,8 +146,11 @@ function update(){
             break;
     }
     
+    // 储存数据同时检查是否全选
+    var all=true;
     for(let item of itemList){
         var completed=item.classList.contains("completed");
+        if(!completed) all=false;
         var value=item.querySelector(".todo-label").innerHTML;
         var itemData={
             "Value":value,
@@ -158,6 +161,8 @@ function update(){
     
     storage.setItem("TodoList",JSON.stringify(itemsData));
     storage.setItem("filter",filter);
+
+    $(".toggle-all").checked=all;
 }
 
 // 增加一项
@@ -293,7 +298,6 @@ function addItem(value){
             if(li.classList.contains("completed")){
                 li.classList.remove("completed");
                 toggle.checked=false;
-                $(".toggle-all").checked=false;
                 todoNum++;
                 update();
             }
@@ -304,8 +308,7 @@ function addItem(value){
         e.stopPropagation();
         
     });
-    // 取消全选
-    $(".toggle-all").checked=false;
+
     $(".todo-list").appendChild(li);
     update();
     return li;
