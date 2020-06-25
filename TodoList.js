@@ -85,10 +85,12 @@ function init(){
     // 筛选器
     var filter=storage.getItem("filter");
     var filters = $All(".filters a");
-    for(let f of filters){
-        f.classList.remove("selected");
-        if(f.innerHTML==filter){
-            f.classList.add("selected");
+    if(filter){
+        for(let f of filters){
+            f.classList.remove("selected");
+            if(f.innerHTML==filter){
+                f.classList.add("selected");
+            }
         }
     }
 
